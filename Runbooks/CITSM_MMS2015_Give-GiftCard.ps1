@@ -65,7 +65,32 @@ Try
     Write-VerboseStream "Variable strItem set to: $strItem"
 
     # Get the winner string
-    $StrWinnerString = "The winner is:  " + $hshResult.Get_Item($strItem) + "!!!"
+    $strWinnerName = $hshResult.Get_Item($strItem)
+    $StrWinnerString = "The winner is:  " + $strWinnerName + "!!!"    
+
+    # Manually configured variables
+    $StrCredentialName = "CpmAzureO365Cred"
+    $StrMessageTo = @("cmank@concurrency.com", "cmank@concurrency.com")
+    $StrSmtpServer = 'smtp.office365.com'
+
+    # Build email variables
+    $StrMessageSubject = 'MMS 2015 Gift Card Giveaway'
+    $StrMessageBody = "<font face=`"Calibri`">Hey Nate,<br><br>
+
+	    Un...can you do me a favor? Can you give $StrWinnerName their gift card?<br><br>
+		
+	    Thanks!<br><br>
+	
+	    Christopher</font>"
+
+    # Retrieve Office365 credentials
+    $ObjAzureCred = Get-AutomationPSCredential -Name $StrCredentialName
+
+	# Send Email
+	if ($ObjAzureCred) 
+	{
+		Send-MailMessage -To $StrMessageTo -Subject $StrMessageSubject -Body $StrMessageBody -UseSsl -Port 587 -SmtpServer $StrSmtpServer -From $ObjAzureCred.UserName -BodyAsHtml -Credential $ObjAzureCred
+	}
 }
 
 Catch
