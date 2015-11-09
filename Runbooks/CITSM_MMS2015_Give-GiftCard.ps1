@@ -66,30 +66,35 @@ Try
 
     # Get the winner string
     $strWinnerName = $hshResult.Get_Item($strItem)
-    $StrWinnerString = "The winner is:  " + $strWinnerName + "!!!"    
+    $StrWinnerString = "The winner is:  " + $strWinnerName + "!!!"
 
     # Manually configured variables
     $StrCredentialName = "CpmAzureO365Cred"
     $StrMessageTo = @("cmank@concurrency.com", "cmank@concurrency.com")
     $StrSmtpServer = 'smtp.office365.com'
+    Write-VerboseStream "Email settings configured"
 
     # Build email variables
     $StrMessageSubject = 'MMS 2015 Gift Card Giveaway'
     $StrMessageBody = "<font face=`"Calibri`">Hey Nate,<br><br>
 
-	    Un...can you do me a favor? Can you give $StrWinnerName their gift card?<br><br>
+	    Um...can you do me a favor? Can you give $StrWinnerName their gift card?<br><br>
 		
 	    Thanks!<br><br>
 	
 	    Christopher</font>"
 
+    Write-VerboseStream "Email Subject and Message configured"
+    
     # Retrieve Office365 credentials
     $ObjAzureCred = Get-AutomationPSCredential -Name $StrCredentialName
+    Write-VerboseStream "Got the Office365 credential from AA"
 
 	# Send Email
-	if ($ObjAzureCred) 
+	If ($ObjAzureCred) 
 	{
 		Send-MailMessage -To $StrMessageTo -Subject $StrMessageSubject -Body $StrMessageBody -UseSsl -Port 587 -SmtpServer $StrSmtpServer -From $ObjAzureCred.UserName -BodyAsHtml -Credential $ObjAzureCred
+        Write-VerboseStream "Email sent"
 	}
 }
 
