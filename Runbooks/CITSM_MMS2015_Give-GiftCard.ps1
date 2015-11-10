@@ -71,6 +71,7 @@ Try
     # Manually configured variables
     $StrCredentialName = "CpmAzureO365Cred"
     $StrMessageTo = @("cmank@concurrency.com", "cmank@concurrency.com")
+	#$StrMessageTo = @("nlasnoski@concurrency.com", "cmank@concurrency.com")
     $StrSmtpServer = 'smtp.office365.com'
     Write-VerboseStream "Email settings configured"
 
@@ -80,9 +81,7 @@ Try
 
 	    Um...can you do me a favor? Can you give $StrWinnerName their gift card?<br><br>
 		
-	    Thanks!<br><br>
-	
-	    Christopher</font>"
+	    Thanks Dude!</font>"
 
     Write-VerboseStream "Email Subject and Message configured"
     
