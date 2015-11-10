@@ -79,7 +79,7 @@ Try
     $StrMessageSubject = 'MMS 2015 Gift Card Giveaway'
     $StrMessageBody = "<font face=`"Calibri`">Hey Nate,<br><br>
 
-	    Um...can you do me a favor? Can you give $StrWinnerName their gift card?<br><br>
+	    Um...can you do me a favor? Can you give $StrWinnerName this gift card?<br><br>
 		
 	    Thanks Dude!</font>"
 
