@@ -96,6 +96,9 @@ Try
 		Send-MailMessage -To $StrMessageTo -Subject $StrMessageSubject -Body $StrMessageBody -UseSsl -Port 587 -SmtpServer $StrSmtpServer -From $ObjAzureCred.UserName -BodyAsHtml -Credential $ObjAzureCred
         Write-VerboseStream "Email sent"
 	}
+	
+	# Write message to Event Log for OMS
+	Write-EventLog –LogName Application –Source “AzureAutomationHybridWorker” –EntryType "Information" –EventID 900 -Message $StrWinnerString
 }
 
 Catch
